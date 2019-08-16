@@ -43,7 +43,6 @@
 		</div>
 	
 	</form>
-	<a href="?p=daftar">Lakukan pendaftaran jika belum mempunyai akun</a>
 	</div>
 	<div class="col-md-3"></div>
 	</div>
