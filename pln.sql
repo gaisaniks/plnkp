@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.7
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Waktu pembuatan: 17 Agu 2019 pada 15.43
--- Versi server: 10.1.30-MariaDB
--- Versi PHP: 7.2.2
+-- Host: localhost:3306
+-- Generation Time: Sep 02, 2019 at 01:51 PM
+-- Server version: 5.7.24
+-- PHP Version: 7.2.19
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -25,7 +25,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `pemutusan`
+-- Table structure for table `pemutusan`
 --
 
 CREATE TABLE `pemutusan` (
@@ -34,52 +34,35 @@ CREATE TABLE `pemutusan` (
   `alamat` varchar(100) NOT NULL,
   `tarif` varchar(5) NOT NULL,
   `daya` int(4) NOT NULL,
-  `no_upr` varchar(50) NOT NULL,
-  `kode_prr` varchar(50) NOT NULL,
-  `kode_tiang` varchar(50) NOT NULL,
-  `kode_gardu` varchar(50) NOT NULL,
-  `kode_rbm` varchar(50) NOT NULL,
-  `lembar` varchar(50) NOT NULL,
-  `bln_awal` varchar(50) NOT NULL,
-  `bln_akhir` varchar(50) NOT NULL
+  `sketsa` varchar(200) NOT NULL,
+  `persil` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `pemutusan`
+-- Dumping data for table `pemutusan`
 --
 
-INSERT INTO `pemutusan` (`id_pel`, `nama`, `alamat`, `tarif`, `daya`, `no_upr`, `kode_prr`, `kode_tiang`, `kode_gardu`, `kode_rbm`, `lembar`, `bln_awal`, `bln_akhir`) VALUES
-(1, 'sa', 'plg', 'r1mt', 1300, '', '', '', '', '', '', '', '');
+INSERT INTO `pemutusan` (`id_pel`, `nama`, `alamat`, `tarif`, `daya`, `sketsa`, `persil`) VALUES
+(1, 'Jenrinaldo', 'Malang', '1000', 900, 'sketsa_1.jpg', 'persil_1.jpg');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `pengguna`
+-- Table structure for table `pengguna`
 --
 
 CREATE TABLE `pengguna` (
-  `id_peg` int(12) NOT NULL,
-  `nama_peg` varchar(50) NOT NULL,
-  `username` varchar(50) NOT NULL,
-  `password` varchar(50) NOT NULL
+  `username` varchar(100) NOT NULL,
+  `password` varchar(16) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `pengguna`
+-- Dumping data for table `pengguna`
 --
 
-INSERT INTO `pengguna` (`id_peg`, `nama_peg`, `username`, `password`) VALUES
-(0, '', 'admin', 'admin');
-
---
--- Indexes for dumped tables
---
-
---
--- Indeks untuk tabel `pemutusan`
---
-ALTER TABLE `pemutusan`
-  ADD PRIMARY KEY (`id_pel`);
+INSERT INTO `pengguna` (`username`, `password`) VALUES
+('admin', 'admin'),
+('admin', 'admin');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
