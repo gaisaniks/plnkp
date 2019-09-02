@@ -1,27 +1,56 @@
 <?php
 	if(isset($_POST['simpan'])){
-		$cek=mysqli_fetch_array(mysqli_query($con,"select count(*) as cek from pemutusan where id_pel='$_POST[id_pel]'"));
-		if($cek['cek']>0){
-			echo"
-				<script>alert('Maaf ID Pelanggan sudah terdaftar);document.location='?p=form'</script>
-			";
-			exit;
-		}
-		
-		$sql=mysqli_query($con,"insert into pemutusan values('".$_POST['id_pel']."','".$_POST['nama']."','".$_POST['alamat']."','".$_POST['tarif']."','".$_POST['daya']."')");
-		if($sql){
-			$id=mysqli_fetch_array(mysqli_query($con,"select * from pemutusan order by id_pel desc limit 1"));
-			if(!empty($_FILES['sketsa']['tmp_name'])){ 
-				move_uploaded_file($_FILES['sketsa']['tmp_name'], "sketsa/sketsa_".$id['id_pel'].".jpg");
+		$sketsaImgFile = $_FILES['sketsa']['name'];
+		$sketsaTmp_dir = $_FILES['sketsa']['tmp_name'];
+		$sketsaImgSize = $_FILES['sketsa']['size'];
+
+		$persilImgFile = $_FILES['persil']['name'];
+		$persilTmp_dir = $_FILES['persil']['tmp_name'];
+		$persilImgSize = $_FILES['persil']['size'];
+		if (empty($sketsaImgFile)||empty($persilImgFile)){
+			$errMSG = "Silahkan pilih gambar.";
+		} else {
+			$directoryName = 'uploads';
+			if(!is_dir($directoryName)){
+				mkdir($directoryName, 0755);
 			}
-		
-			if(!empty($_FILES['persil']['tmp_name'])){ 
-				move_uploaded_file($_FILES['persil']['tmp_name'], "persil/persil_".$id['id_pel'].".jpg");
+			$upload_dir = 'uploads/';
+			$sketsaImgExt = strtolower(pathinfo($sketsaImgFile,PATHINFO_EXTENSION));
+			$persilImgExt = strtolower(pathinfo($persilImgFile,PATHINFO_EXTENSION));
+			$valid_extensions = array('jpeg', 'jpg', 'png', 'gif');
+			$id_pel = $_POST['id_pel'];
+			$nama = $_POST['nama'];
+			$alamat = $_POST['alamat'];
+			$tarif = $_POST['tarif'];
+			$daya = $_POST['daya'];
+			$docfileSketsa = "sketsa_".$id_pel.".".$sketsaImgExt;
+			$docfilePersil = "persil_".$id_pel.".".$sketsaImgExt;;
+			if(in_array($sketsaImgExt, $valid_extensions)||in_array($persilImgExt, $valid_extensions)){			
+				if($sketsaImgSize < 5000000)				{
+					move_uploaded_file($sketsaTmp_dir,$upload_dir.$docfileSketsa);
+				}
+				else{
+					$errMSG = "Ukuran file terlalu besar.";
+				}
+				if($persilImgSize < 5000000)				{
+					move_uploaded_file($persilTmp_dir,$upload_dir.$docfilePersil);
+				}
+				else{
+					$errMSG = "Ukuran file terlalu besar.";
+				}
 			}
-			
-			echo"
-				<script>alert('Data berhasil disimpan');document.location='?p=form'</script>
-			";
+			else{
+				$errMSG = "Format yang diizinkan adalah JPG, JPEG, PNG & GIF.";		
+			}
+		}	
+		if(!isset($errMSG))
+		{
+			$sql = "INSERT INTO pemutusan(id_pel,nama,alamat,tarif,daya,sketsa,persil) VALUES('".$id_pel."','".$nama."','".$alamat."','".$tarif."','".$daya."','".$docfileSketsa."','".$docfilePersil."')";
+			if(mysqli_query($con, $sql)){
+				echo "<script>alert('Data berhasil disimpan');document.location='?p=form'</script>";
+			}else{
+				echo "<script>alert('Error');document.location='?p=form'</script>";
+			}
 		}
 	}
 	if(isset($_GET['ubah'])){
@@ -58,7 +87,7 @@
 	</div>
 
 <div class="container">
-	<form class="form-horizontal" method="post">
+	<form class="form-horizontal" method="post" enctype="multipart/form-data">
 		<div class="form-group">
 			<label class="control-label col-sm-2">ID Pelanggan :</label>
 				<input type="number" class="form-control" placeholder="ID Pelanggan" name="id_pel" required="required"
@@ -98,12 +127,12 @@
 				
 		<div class="form-group">
 			<label>Upload Foto Sketsa Lokasi</label>
-			<input type="file" name="sketsa" class="form-control" required="required" >
+			<input class="input-group" type="file" name="sketsa" accept="image/*" class="form-control" required="required" />
 		</div>
 
 		<div class="form-group">
 			<label>Upload Foto Photo Persil</label>
-			<input type="file" name="persil" class="form-control" required="required" >
+			<input class="input-group" type="file" name="persil" accept="image/*" class="form-control" required="required" />
 		</div>
 
 		<div class="form-group">
@@ -142,8 +171,8 @@
 				<td><?php echo $res['alamat'];?></td>
 				<td><?php echo $res['tarif'];?></td>
 				<td><?php echo $res['daya'];?></td>
-				<td><a href="sketsa/sketsa_<?php echo $res['id_pel']?>.jpg" target="_blank">Lihat</a></td>
-				<td><a href="persil/persil_<?php echo $res['id_pel']?>.jpg" target="_blank">Lihat</a></td>
+				<td><a href="uploads/sketsa_<?php echo $res['id_pel']?>.jpg" target="_blank">Lihat</a></td>
+				<td><a href="uploads/persil_<?php echo $res['id_pel']?>.jpg" target="_blank">Lihat</a></td>
 				<td>
 					<a href="?p=member&ubah=<?php echo $res['id_pel'];?>">ubah</a> ||
 					<a href="?p=member&hapus=<?php echo $res['id_pel'];?>">hapus</a>
