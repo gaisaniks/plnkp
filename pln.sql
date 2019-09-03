@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Sep 02, 2019 at 01:51 PM
+-- Generation Time: Sep 03, 2019 at 10:20 AM
 -- Server version: 5.7.24
 -- PHP Version: 7.2.19
 
@@ -21,6 +21,27 @@ SET time_zone = "+00:00";
 --
 -- Database: `pln`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `log`
+--
+
+CREATE TABLE `log` (
+  `id_log` int(11) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `tgl_log` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `log`
+--
+
+INSERT INTO `log` (`id_log`, `email`, `tgl_log`) VALUES
+(19, 'jenrinaldo@student.ub.ac.id', '2019-09-03 07:13:34'),
+(20, 'jenrinaldo@student.ub.ac.id', '2019-09-03 07:46:57'),
+(21, 'jenrinaldo@student.ub.ac.id', '2019-09-03 07:55:10');
 
 -- --------------------------------------------------------
 
@@ -43,26 +64,62 @@ CREATE TABLE `pemutusan` (
 --
 
 INSERT INTO `pemutusan` (`id_pel`, `nama`, `alamat`, `tarif`, `daya`, `sketsa`, `persil`) VALUES
-(1, 'Jenrinaldo', 'Malang', '1000', 900, 'sketsa_1.jpg', 'persil_1.jpg');
+(1, 'Jen', 'Malang', '100', 2200, 'photo/sketsa_1.jpg', 'photo/persil_1.jpg');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pengguna`
+-- Table structure for table `users`
 --
 
-CREATE TABLE `pengguna` (
-  `username` varchar(100) NOT NULL,
-  `password` varchar(16) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+CREATE TABLE `users` (
+  `user_id` int(5) NOT NULL,
+  `username` varchar(25) NOT NULL,
+  `email` varchar(35) NOT NULL,
+  `password` varchar(50) NOT NULL,
+  `tgl_daftar` timestamp NULL DEFAULT NULL,
+  `status` enum('1','0') DEFAULT '0'
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `pengguna`
+-- Dumping data for table `users`
 --
 
-INSERT INTO `pengguna` (`username`, `password`) VALUES
-('admin', 'admin'),
-('admin', 'admin');
+INSERT INTO `users` (`user_id`, `username`, `email`, `password`, `tgl_daftar`, `status`) VALUES
+(5, 'jen', 'jenrinaldo@student.ub.ac.id', 'b18ea44550b68d0d012bd9017c4a864a', NULL, '1');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `log`
+--
+ALTER TABLE `log`
+  ADD PRIMARY KEY (`id_log`);
+
+--
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`user_id`),
+  ADD UNIQUE KEY `email` (`email`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `log`
+--
+ALTER TABLE `log`
+  MODIFY `id_log` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `user_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

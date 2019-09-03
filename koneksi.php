@@ -5,7 +5,7 @@ $password = "root";
 $dbname = "pln";
 
 try {
-	$con = new mysqli($servername, $username, $password, $dbname);
+	$koneksi = new mysqli($servername, $username, $password, $dbname);
 } catch (\Throwable $th) {
 	die("Connection failed: " . $con->connect_error);
 }
