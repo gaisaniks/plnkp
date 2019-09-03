@@ -46,7 +46,7 @@ if (!is_dir($namafolder)) {
 
             
             
-           $a= "UPDATE pemutusan SET sketsa='$photo' WHERE id_pel='$id' LIMIT 1";
+           $a= "UPDATE pemutusan SET sketsa='$sketsa' WHERE id_pel='$id' LIMIT 1";
            $b=mysqli_query($koneksi,$a);
         }
         else { die("Jenis gambar yang anda kirim salah. Harus .jpg .gif .png"); }
