@@ -24,7 +24,7 @@
   <font face="Times New Roman">
   
     <div class="row">
-	<img src="images/Logo_PLN.png" width="85px" height="auto">
+	<img src="images/Logo_PLN.png" width="85px" height="auto" style="margin-left:15px">
 	<div class="ml-3"><p>PT. PLN(PERSERO) WILAYAH S2JB<br>ULP RIVAI<br>PALEMBANG</p><br>
 	</div>
 	</div>
