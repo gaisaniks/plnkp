@@ -22,7 +22,13 @@
   
   <body>
   <font face="Times New Roman">
-    <p>PT. PLN(PERSERO) WILAYAH S2JB<br>RAYON RIVAI<br>PALEMBANG </p><br>
+  
+    <div class="row">
+	<img src="images/Logo_PLN.png" width="85px" height="auto">
+	<div class="ml-3"><p>PT. PLN(PERSERO) WILAYAH S2JB<br>ULP RIVAI<br>PALEMBANG</p><br>
+	</div>
+	</div>
+	
 		<p align="center">LAMPIRAN BERITA ACARA<br>
 		===============================================<br>
 		PEMUTUSAN RAMPUNG SAMBUNGAN RUMAH (SR) DAN APP</p>
@@ -31,22 +37,20 @@
 	<table class="table table-bordered">
 		<thead>
 			<tr>
-				<th>ID PELANGGAN:</th>
-				<td><?php echo $data->id_pel ?></td>
-				<th></th>
-				<td></td>
+				<th width="155px">ID PELANGGAN:</th>
+				<td width="300px"><?php echo $data->id_pel ?></td>
+				<th rowspan="2" width="155px">ALAMAT:</th>
+				<td rowspan="2" width="350px"><?php echo $data->alamat ?></td>
 			</tr>
 			<tr>
-				<th>NAMA:</th>
-				<td><?php echo $data->nama ?></td>
-				<th>ALAMAT:</th>
-				<td><?php echo $data->alamat ?></td>
+				<th width="155px">NAMA:</th>
+				<td width="300px"><?php echo $data->nama ?></td>
 			</tr>
 			<tr>
-				<th>TARIF:</th>
-				<td><?php echo $data->tarif ?></td>
-				<th>DAYA:</th>
-				<td><?php echo $data->daya ?></td>
+				<th width="155px">TARIF:</th>
+				<td width="300"><?php echo $data->tarif ?></td>
+				<th width="155px">DAYA:</th>
+				<td width="300"><?php echo $data->daya ?></td>
 			</tr>
 		</tbody>
 	</table>
