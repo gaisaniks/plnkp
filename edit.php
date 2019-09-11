@@ -170,6 +170,7 @@ if (!is_dir($namafolder)) {
           <tr>
             <td bordercolor="#999999" ><input name="tblIsi" type="submit" id="tblIsi" value="Simpan" /></td>
             <td bordercolor="#999999" ><input type="reset" name="reset" value="Reset" /></td>
+	    <td bordercolor="#999999" ><input type="button" value="Go Back" onclick="history.back(-1)" /></td>
           </tr>
       </table></td>
     </tr>
