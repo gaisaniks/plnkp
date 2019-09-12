@@ -1,7 +1,10 @@
 <?php
 session_start();
 include_once 'koneksi.php';
-
+require 'vendor/autoload.php';
+use PhpOffice\PhpSpreadsheet\Reader\Csv;
+use PhpOffice\PhpSpreadsheet\Reader\Xlsx;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
 if (!isset($_SESSION['user'])) {
     header("Location: index.php");
 }
@@ -36,31 +39,63 @@ if (isset($_POST['tblIsi'])) {
     }
 
     if (!empty($_FILES["sketsa"]["tmp_name"])) {
-		$namafolder = "photo/"; //tempat menyimpan file
-		if (!is_dir($namafolder)) {
-			mkdir($namafolder, 0755);
-		  }
-		$jenis_gambar = $_FILES['sketsa']['type'];
-		$ext = strtolower(pathinfo($_FILES['sketsa']['name'], PATHINFO_EXTENSION));
+        $namafolder = "photo/"; //tempat menyimpan file
+        if (!is_dir($namafolder)) {
+            mkdir($namafolder, 0755);
+        }
+        $jenis_gambar = $_FILES['sketsa']['type'];
+        $ext = strtolower(pathinfo($_FILES['sketsa']['name'], PATHINFO_EXTENSION));
         if ($jenis_gambar == "image/jpeg" || $jenis_gambar == "image/jpg" || $jenis_gambar == "image/gif" || $jenis_gambar == "image/png") {
-            $sketsa = $namafolder."sketsa_".$id.".".$ext;
+            $sketsa = $namafolder . "sketsa_" . $id . "." . $ext;
             if (!move_uploaded_file($_FILES['sketsa']['tmp_name'], $sketsa)) {die("Gambar gagal dikirim");}
         } else {die("Jenis gambar yang anda kirim salah. Harus .jpg .gif .png");}
-    } 
+    }
 
     if (!empty($_FILES["persil"]["tmp_name"])) {
-		$namafolder = "photo/"; //tempat menyimpan file
-		$ext = strtolower(pathinfo($_FILES['persil']['name'], PATHINFO_EXTENSION));
+        $namafolder = "photo/"; //tempat menyimpan file
+        $ext = strtolower(pathinfo($_FILES['persil']['name'], PATHINFO_EXTENSION));
         $jenis_gambar = $_FILES['persil']['type'];
         if ($jenis_gambar == "image/jpeg" || $jenis_gambar == "image/jpg" || $jenis_gambar == "image/gif" || $jenis_gambar == "image/png") {
-            $persil = $namafolder."persil_".$id.".".$ext;
+            $persil = $namafolder . "persil_" . $id . "." . $ext;
             if (!move_uploaded_file($_FILES['persil']['tmp_name'], $persil)) {die("Gambar gagal dikirim");}
         } else {die("Jenis gambar yang anda kirim salah. Harus .jpg .gif .png");}
-    } 
+    }
 
     @$a = "insert into pemutusan values  ('$id','$nama','$alamat','$tarif','$daya','$sketsa','$persil')";
     $b = mysqli_query($koneksi, $a);
     echo "<script>alert('Data Disimpan');document.location='index.php'</script>";
+}
+if (isset($_POST['upload'])) {
+    $file_mimes = array('text/x-comma-separated-values', 'text/comma-separated-values', 'application/octet-stream', 'application/vnd.ms-excel', 'application/x-csv', 'text/x-csv', 'text/csv', 'application/csv', 'application/excel', 'application/vnd.msexcel', 'text/plain', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+    if (isset($_FILES['fileData']['name']) && in_array($_FILES['fileData']['type'], $file_mimes)) {
+
+        $arr_file = explode('.', $_FILES['fileData']['name']);
+        $extension = end($arr_file);
+
+        if ('csv' == $extension) {
+            $reader = new \PhpOffice\PhpSpreadsheet\Reader\Csv();
+        } else {
+            $reader = new \PhpOffice\PhpSpreadsheet\Reader\Xlsx();
+        }
+
+        $spreadsheet = $reader->load($_FILES['fileData']['tmp_name']);
+
+        $sheetData = $spreadsheet->getActiveSheet()->toArray();
+		foreach($sheetData as $val){
+				$idPel = $val[0];
+				$nama = $val[1];
+				$alamat = $val[2];
+				$tarif = $val[3];
+				$daya = $val[4];
+				$sketsa = $val[5];
+				$persil = $val[6];
+				if ($idPel != "" && $nama != "" && $alamat != "" && $tarif != "" && $daya != "" && $sketsa != "" && $persil != "") {
+					mysqli_query($koneksi, "INSERT into pemutusan values('$idPel','$nama','$alamat','$tarif','$daya','$sketsa','$persil')");
+				}
+		}
+	}
+	unlink($_FILES['fileData']['name']);
+	header("Location: home.php");
 }
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -75,6 +110,11 @@ if (isset($_POST['tblIsi'])) {
 	Selamat Datang <?php echo $userRow['username']; ?>&nbsp;<a href="logout.php?logout">Sign Out</a>
 				<!-- Trigger/Open The Modal -->
 				<button id="myBtn">Tambah Data</button>
+				<form action="" method="post" enctype="multipart/form-data">
+				Pilih File:
+				<input name="fileData" id="fileData" type="file" required="required">
+				<input name="upload" id="upload" type="submit" value="Import">
+				</form>
 				<table width="100%" border="1" align="center" id="myTable">
 					<caption align="top">&nbsp;
 					</caption>
@@ -158,6 +198,7 @@ while ($data = mysqli_fetch_array($b)) {
   						</label></td>
   					</tr>
   				</table>
+
   			</div>
   			<div class="modal-footer">
   				<input name="tblIsi" type="submit" id="tblIsi" value="Simpan">
