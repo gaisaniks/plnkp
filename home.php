@@ -173,17 +173,61 @@ while ($data = mysqli_fetch_array($b)) {
   					</tr>
   					<tr>
   						<td>Tarif</td>
-  						<td><input type="text" name="tarif" size="10" /></td>
+  						<td><select name="tarif" class="form-control" >
+							<option value="">Tarif</option>
+							<?php $tarif = (isset($_GET['tarif']) ? strtolower($_GET['tarif']) : null);?>
+							<option value="R1" <?php if ($tarif == 'R1') {echo 'selected';}?>>R1</option>
+							<option value="R2" <?php if ($tarif == 'R2') {echo 'selected';}?>>R2</option>
+							<option value="R3" <?php if ($tarif == 'R3') {echo 'selected';}?>>R3</option>
+							<option value="B1" <?php if ($tarif == 'B1') {echo 'selected';}?>>B1</option>
+							<option value="B2" <?php if ($tarif == 'B2') {echo 'selected';}?>>B2</option>
+							<option value="B3" <?php if ($tarif == 'B3') {echo 'selected';}?>>B3</option>
+							<option value="S1" <?php if ($tarif == 'S1') {echo 'selected';}?>>S1</option>
+							<option value="S2" <?php if ($tarif == 'S2') {echo 'selected';}?>>S2</option>
+							<option value="S3" <?php if ($tarif == 'S3') {echo 'selected';}?>>S3</option>
+							<option value="P1" <?php if ($tarif == 'P1') {echo 'selected';}?>>P1</option>
+							<option value="P2" <?php if ($tarif == 'P2') {echo 'selected';}?>>P2</option>
+							<option value="P3" <?php if ($tarif == 'P3') {echo 'selected';}?>>P3</option>
+							<option value="I1" <?php if ($tarif == 'I1') {echo 'selected';}?>>I1</option>
+							<option value="I2" <?php if ($tarif == 'I2') {echo 'selected';}?>>I2</option>
+							<option value="I3" <?php if ($tarif == 'I3') {echo 'selected';}?>>I3</option>
+							<option value="LP" <?php if ($tarif == 'LP') {echo 'selected';}?>>LP</option>
+							<option value="LS" <?php if ($tarif == 'LS') {echo 'selected';}?>>LS</option>
+							<option value="LB" <?php if ($tarif == 'LB') {echo 'selected';}?>>LB</option>
+							<option value="LI" <?php if ($tarif == 'LI') {echo 'selected';}?>>LI</option>
+						</select></td>
   					</tr>
   					<tr>
   						<td>Daya</td>
   						<td><select name="daya" class="form-control" >
-				<option value="">Daya</option>
-				<?php $daya = (isset($_GET['daya']) ? strtolower($_GET['daya']) : null);?>
-				<option value="900" <?php if ($daya == '900') {echo 'selected';}?>>900</option>
-				<option value="1300" <?php if ($daya == '1300') {echo 'selected';}?>>1300</option>
-				<option value="2200" <?php if ($daya == '2200') {echo 'selected';}?>>2200</option>
-			</select></td>
+							<option value="">Daya</option>
+							<?php $daya = (isset($_GET['daya']) ? strtolower($_GET['daya']) : null);?>
+							<option value="450" <?php if ($daya == '450') {echo 'selected';}?>>450</option>
+							<option value="900" <?php if ($daya == '900') {echo 'selected';}?>>900</option>
+							<option value="1300" <?php if ($daya == '1300') {echo 'selected';}?>>1300</option>
+							<option value="2200" <?php if ($daya == '2200') {echo 'selected';}?>>2200</option>
+							<option value="3500" <?php if ($daya == '3500') {echo 'selected';}?>>3500</option>
+							<option value="3900" <?php if ($daya == '3900') {echo 'selected';}?>>3900</option>
+							<option value="4400" <?php if ($daya == '4400') {echo 'selected';}?>>4400</option>
+							<option value="5500" <?php if ($daya == '5500') {echo 'selected';}?>>5500</option>
+							<option value="6600" <?php if ($daya == '6600') {echo 'selected';}?>>6600</option>
+							<option value="7700" <?php if ($daya == '7700') {echo 'selected';}?>>7700</option>
+							<option value="10600" <?php if ($daya == '10600') {echo 'selected';}?>>10600</option>
+							<option value="11000" <?php if ($daya == '11000') {echo 'selected';}?>>11000</option>
+							<option value="13200" <?php if ($daya == '13200') {echo 'selected';}?>>13200</option>
+							<option value="16500" <?php if ($daya == '16500') {echo 'selected';}?>>16500</option>
+							<option value="23000" <?php if ($daya == '23000') {echo 'selected';}?>>23000</option>
+							<option value="33000" <?php if ($daya == '33000') {echo 'selected';}?>>33000</option>
+							<option value="41500" <?php if ($daya == '41500') {echo 'selected';}?>>41500</option>
+							<option value="53000" <?php if ($daya == '53000') {echo 'selected';}?>>53000</option>
+							<option value="66000" <?php if ($daya == '66000') {echo 'selected';}?>>66000</option>
+							<option value="82500" <?php if ($daya == '82500') {echo 'selected';}?>>82500</option>
+							<option value="105000" <?php if ($daya == '105000') {echo 'selected';}?>>105000</option>
+							<option value="131000" <?php if ($daya == '131000') {echo 'selected';}?>>131000</option>
+							<option value="147000" <?php if ($daya == '147000') {echo 'selected';}?>>147000</option>
+							<option value="164000" <?php if ($daya == '164000') {echo 'selected';}?>>164000</option>
+							<option value="197000" <?php if ($daya == '197000') {echo 'selected';}?>>197000</option>
+						</select></td>
   					</tr>
   					<tr>
   						<td>Sketsa</td>
