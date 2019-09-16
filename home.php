@@ -227,7 +227,7 @@ while ($data = mysqli_fetch_array($b)) {
 							<option value="147000" <?php if ($daya == '147000') {echo 'selected';}?>>147000</option>
 							<option value="164000" <?php if ($daya == '164000') {echo 'selected';}?>>164000</option>
 							<option value="197000" <?php if ($daya == '197000') {echo 'selected';}?>>197000</option>
-						</select></td>
+						</select> </td>
   					</tr>
   					<tr>
   						<td>Sketsa</td>
