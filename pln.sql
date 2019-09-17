@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Sep 03, 2019 at 10:20 AM
+-- Generation Time: Sep 17, 2019 at 08:00 PM
 -- Server version: 5.7.24
 -- PHP Version: 7.2.19
 
@@ -41,7 +41,13 @@ CREATE TABLE `log` (
 INSERT INTO `log` (`id_log`, `email`, `tgl_log`) VALUES
 (19, 'jenrinaldo@student.ub.ac.id', '2019-09-03 07:13:34'),
 (20, 'jenrinaldo@student.ub.ac.id', '2019-09-03 07:46:57'),
-(21, 'jenrinaldo@student.ub.ac.id', '2019-09-03 07:55:10');
+(21, 'jenrinaldo@student.ub.ac.id', '2019-09-03 07:55:10'),
+(22, 'jenrinaldo@student.ub.ac.id', '2019-09-11 14:23:51'),
+(23, 'jenrinaldo@student.ub.ac.id', '2019-09-11 14:23:56'),
+(24, 'jenrinaldo@student.ub.ac.id', '2019-09-11 14:24:02'),
+(25, 'jenrinaldo@student.ub.ac.id', '2019-09-11 14:24:06'),
+(26, 'jenrinaldo@student.ub.ac.id', '2019-09-12 00:00:30'),
+(27, 'jenrinaldo@student.ub.ac.id', '2019-09-17 19:37:40');
 
 -- --------------------------------------------------------
 
@@ -50,7 +56,7 @@ INSERT INTO `log` (`id_log`, `email`, `tgl_log`) VALUES
 --
 
 CREATE TABLE `pemutusan` (
-  `id_pel` int(12) NOT NULL,
+  `id_pel` varchar(12) NOT NULL,
   `nama` varchar(100) NOT NULL,
   `alamat` varchar(100) NOT NULL,
   `tarif` varchar(5) NOT NULL,
@@ -64,7 +70,7 @@ CREATE TABLE `pemutusan` (
 --
 
 INSERT INTO `pemutusan` (`id_pel`, `nama`, `alamat`, `tarif`, `daya`, `sketsa`, `persil`) VALUES
-(1, 'Jen', 'Malang', '100', 2200, 'photo/sketsa_1.jpg', 'photo/persil_1.jpg');
+('061830800634', 'Jenrinaldo Tampubolon', 'Malang', 'R1', 6600, 'photo/sketsa_061830800634.jpg', 'photo/persil_061830800634.jpg');
 
 -- --------------------------------------------------------
 
@@ -113,7 +119,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `log`
 --
 ALTER TABLE `log`
-  MODIFY `id_log` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id_log` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `users`

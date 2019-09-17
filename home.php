@@ -59,10 +59,9 @@ if (isset($_POST['tblIsi'])) {
             $persil = $namafolder . "persil_" . $id . "." . $ext;
             if (!move_uploaded_file($_FILES['persil']['tmp_name'], $persil)) {die("Gambar gagal dikirim");}
         } else {die("Jenis gambar yang anda kirim salah. Harus .jpg .gif .png");}
-    }
-
-    @$a = "insert into pemutusan values  ('$id','$nama','$alamat','$tarif','$daya','$sketsa','$persil')";
-    $b = mysqli_query($koneksi, $a);
+	}
+	echo $id;
+    mysqli_query($koneksi,"INSERT into pemutusan values  ('$id','$nama','$alamat','$tarif','$daya','$sketsa','$persil')");
     echo "<script>alert('Data Disimpan');document.location='index.php'</script>";
 }
 if (isset($_POST['upload'])) {
