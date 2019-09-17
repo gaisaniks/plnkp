@@ -161,7 +161,7 @@ while ($data = mysqli_fetch_array($b)) {
   				<table align="center" frame="box">
   					<tr>
   						<td width="59">ID</td>
-  						<td width="885"><input type="text" name="id" size="8" /></td>
+  						<td width="885"><input type="number" name="id" size="12" /></td>
   					</tr>
   					<tr>
   						<td>Nama</td>
