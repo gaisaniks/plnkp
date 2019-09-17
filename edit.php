@@ -133,7 +133,7 @@ if (!is_dir($namafolder)) {
           
           <tr>
             <td bordercolor="#999999">ID</td>
-            <td bordercolor="#999999"><input name="id" type="text" id="id" size="8" value="<?php echo $data->id_pel?>" /></td>
+            <td bordercolor="#999999"><input name="id" type="number" id="id" size="12" value="<?php echo $data->id_pel?>" /></td>
             <td width="163" rowspan="8" align="center" valign="top"><a href="<?PHP echo $data->sketsa ?>"><img src="<?php echo  $data->sketsa?>" alt="<?php echo  $data->nama?>" width="100" border="1"/></a></td>
             <td width="163" rowspan="8" align="center" valign="top"><a href="<?PHP echo $data->persil ?>"><img src="<?php echo  $data->persil?>" alt="<?php echo  $data->nama?>" width="100" border="1"/></a></td>
           </tr>
